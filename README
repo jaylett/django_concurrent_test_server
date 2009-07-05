@@ -1,7 +1,8 @@
+=============================
 django_concurrent_test_server
 =============================
 
-<http://code.djangoproject.com/ticket/3357#comment:24> is a Django ticket about making the built-in dev server concurrent. This isn't going to happen any time soon, but one of the comments wondered about turning the patch in the ticket into a separate app that could be dropped in to provide a concurrent dev server as a new command. This is what django_concurrent_test_server does.
+<http://code.djangoproject.com/ticket/3357> is a Django ticket about making the built-in dev server concurrent. This isn't going to happen any time soon, but one of the comments wondered about turning the patch in the ticket into a separate app that could be dropped in to provide a concurrent dev server as a new command. This is what django_concurrent_test_server does.
 
 Almost all the work was done by Istvan Albert, as per <http://is.gd/1h6JX> on <http://groups.google.com/group/django-developers/>. Additionally I've duplicated the runserver command from Django itself, and repackaged the whole lot.
 
@@ -10,7 +11,7 @@ Given the context of the original discussion, and the presence of the patch on t
 James Aylett <http://tartarus.org/james/computers/django/>
 
 Usage
------
+=====
 
 1. Drop the django_concurrent_test_server directory somewhere on your PYTHONPATH
 2. Add django_concurrent_test_server to your INSTALLED_APPS
