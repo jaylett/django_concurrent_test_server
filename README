@@ -19,5 +19,8 @@ Usage
 2. Add django_concurrent_test_server to your INSTALLED_APPS
 3. Add either USE_MULTITHREADED_SERVER = True or USE_MULTIFORKED_SERVER = True to your settings.py
 4. Use ./manage.py runconcurrentserver to start a concurrent server
+5. (optional) Add CONCURRENT_RANDOM_DELAY = True to your settings.py to
+   introduce a small, random delay into each request (useful for finding race
+   conditions).
 
 Note that if you aren't comfortable with threading, you should use the forking version (USE_MULTIFORKED_SERVER).

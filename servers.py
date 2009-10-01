@@ -1,12 +1,22 @@
+import BaseHTTPServer
+import SocketServer
+import random
+import time
+
 from django.core.servers.basehttp import WSGIServer, WSGIRequestHandler
 from django.conf import settings
-import BaseHTTPServer, SocketServer
 
-class ThreadedServer(SocketServer.ThreadingMixIn, WSGIServer):
+class RandomWaitMixin(object):
+    def process_request(self, *args, **kwargs):
+        if getattr(settings, 'CONCURRENT_RANDOM_DELAY', None):
+            time.sleep(random.random()/3)
+        return super(RandomWaitMixin, self).process_request(*args, **kwargs)
+
+class ThreadedServer(RandomWaitMixin, SocketServer.ThreadingMixIn, WSGIServer):
     def __init__(self, server_address, RequestHandlerClass=None):
          BaseHTTPServer.HTTPServer.__init__(self, server_address, RequestHandlerClass)
 
-class ForkedServer(SocketServer.ForkingMixIn, WSGIServer):
+class ForkedServer(RandomWaitMixin, SocketServer.ForkingMixIn, WSGIServer):
     def __init__(self, server_address, RequestHandlerClass=None):
         BaseHTTPServer.HTTPServer.__init__(self, server_address, RequestHandlerClass)
 
