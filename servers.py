@@ -22,19 +22,12 @@ class ForkedServer(RandomWaitMixin, SocketServer.ForkingMixIn, WSGIServer):
 
 def run(addr, port, wsgi_handler):
     server_address = (addr, port)
-    if hasattr(settings, 'USE_MULTITHREADED_SERVER'):
-        threaded = settings.USE_MULTITHREADED_SERVER
-    else:
-        threaded = False
-    if hasattr(settings, 'USE_MULTIFORKED_SERVER'):
-        forked = settings.USE_MULTIFORKED_SERVER
-    else:
-        forked = False
+    threaded = True # else forked
+    if hasattr(settings, 'CONCURRENT_THREADING'):
+        threaded = settings.CONCURRENT_THREADING
     if threaded:
         httpd = ThreadedServer(server_address, WSGIRequestHandler)
-    elif forked:
-        httpd = ForkedServer(server_address, WSGIRequestHandler)
     else:
-        httpd = WSGIServer(server_address, WSGIRequestHandler)
+        httpd = ForkedServer(server_address, WSGIRequestHandler)
     httpd.set_app(wsgi_handler)
     httpd.serve_forever()
