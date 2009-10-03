@@ -17,7 +17,8 @@ Usage
 
 1. Drop the django_concurrent_test_server directory somewhere on your PYTHONPATH
 2. Add django_concurrent_test_server to your INSTALLED_APPS
-3. If threads worry you, and bearing the above warning in mind, add CONCURRENT_THREADING = False to use forking
+3. If threads worry you, and bearing the above warning in mind, set
+   CONCURRENT_THREADING = False in settings.py to use forking
 4. Use ./manage.py runconcurrentserver to start a concurrent server
 5. (optional) Add CONCURRENT_RANDOM_DELAY = True to your settings.py to
    introduce a small, random delay into each request; useful for finding race
