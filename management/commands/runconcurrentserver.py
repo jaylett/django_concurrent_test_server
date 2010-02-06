@@ -14,8 +14,14 @@ class Command(BaseCommand):
     help = "Starts a lightweight Web server for development."
     args = '[optional port number, or ipaddr:port]'
 
-    DEFAULT_ADDR = '127.0.0.1'
-    DEFAULT_PORT = '8000'
+    if hasattr(settings, 'RUNSERVER_DEFAULT_ADDR'):
+        DEFAULT_ADDR = settings.RUNSERVER_DEFAULT_ADDR
+    else:
+        DEFAULT_ADDR = '127.0.0.1'
+    if hasattr(settings, 'RUNSERVER_DEFAULT_PORT'):
+        DEFAULT_PORT = str(settings.RUNSERVER_DEFAULT_PORT)
+    else:
+        DEFAULT_PORT = '8000'
 
     # Validation is called explicitly each time the server is reloaded.
     requires_model_validation = False

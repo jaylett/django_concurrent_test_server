@@ -23,3 +23,6 @@ Usage
 5. (optional) Add CONCURRENT_RANDOM_DELAY = True to your settings.py to
    introduce a small, random delay into each request; useful for finding race
    conditions. (By <http://github.com/wolever>.)
+6. (option) Set RUNSERVER_DEFAULT_ADDR / RUNSERVER_DEFAULT_PORT in settings.py
+   to override the defaults without having to hack the code. Useful for people
+   who don't like aliases, or move things between machines a lot.
