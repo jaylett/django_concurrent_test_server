@@ -33,7 +33,7 @@ class ForkedServer(RandomWaitMixin, SocketServer.ForkingMixIn, WSGIServer):
         # can't recover from this at the moment; the child processes hang around (and
         # have to be killed manually), while the parent dies. Let's avoid that.
         self.socket.close()
-        return super(SocketServer.ForkingMixIn, self).finish_request(request, client_address)
+        return super(self.__class__, self).finish_request(request, client_address)
 
 def run(addr, port, wsgi_handler):
     server_address = (addr, port)
